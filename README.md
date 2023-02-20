@@ -5,7 +5,7 @@ Crea una aplicación para buscar películas
 API a usar:
 
     - https://www.omdbapi.com/
-    - API_KEY: 4287ad07
+    - API_KEY: 51deaec6
 
 Requerimientos:
 
@@ -17,4 +17,4 @@ Primera iteración:
 
 - Evitar que se haga la misma búsqueda dos veces seguidas.
 - Haz que la búsqueda se haga atutomaticamente al escribir.
-- Evita que se haga la búsqueda continuamente al escribir (debaunce).
+- Evita que se haga la búsqueda continuamente al escribir (debaunce). 
