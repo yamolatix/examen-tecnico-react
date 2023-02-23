@@ -9,9 +9,10 @@ API a usar:
 
 Requerimientos:
 
-- Necesita tomar un input para buscar la película y un botón para buscar.
-- Lista las películas encontradas y muestra el título, año y poster.
-- Haz que las películas se muestren en un grid responsive.
+[x] Necesita tomar un input para buscar la película y un botón para buscar.
+[ ] Agregar funcionalidad a la búsqueda de películas. 
+[ ] Lista las películas encontradas y muestra el título, año y poster.
+[ ] Haz que las películas se muestren en un grid responsive.
 
 Primera iteración:
 
