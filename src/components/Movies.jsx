@@ -2,10 +2,10 @@ import React from 'react';
 
 function RenderMovies({ movies }) {
     return (
-        <ul>
+        <ul className='movies'>
             {movies.map(movie =>
             (
-                <li key={movie.id}>
+                <li className='movie' key={movie.id}>
                     <h3>{movie.title}</h3>
                     <p>{movie.year}</p>
                     <img src={movie.image} alt={movie.title} />
@@ -17,7 +17,7 @@ function RenderMovies({ movies }) {
 }
 
 function RenderNoResults() {
-    return (<h1>No hay películas para esta búsqueda</h1>)
+    return (<h3>No hay películas para esta búsqueda</h3>)
 
 }
 

@@ -1,17 +1,15 @@
-import React, { useRef, useState } from 'react'
+import React from 'react'
 import './App.css'
 import { Movies } from './components/Movies'
 import { useMovies } from './hooks/useMovies'
+import { useSearch } from './hooks/useSearch'
 
 function App() {
-  const { movies } = useMovies()
   // const inputRef = useRef() /* Usar en la forma NO controlada (Caso 1 y 2) */
   //  Usar en la forma controlada.(Caso 3)
-  const [query, setQuery] = useState("")
-  const [error, setError] = useState(null)
+  const { search, updateSearch, error } = useSearch()
 
-
-  console.log("render");
+  const { movies, getMovies, loading } = useMovies({ search })
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,31 +28,17 @@ function App() {
     //////////////////////////////////////////////////////////////////////////////////////////////////
 
     // 3
-    console.log("query", { query });
+    // console.log("search", { search });
+
+    getMovies()
   }
 
   // Forma controlada por React
   // 3
   const handleChange = (e) => {
-    const searchQuery = e.target.value /* Para asegurarnos de estar usando el último valor del estado y que no quede un paso atrás */
-    setQuery(searchQuery)
-
-    if (searchQuery == "") {
-      setError("No se puede buscar una película vacia")
-      return
-    }
-
-    if (searchQuery.match(/ˆ\d+$/)) {
-      setError("No se pueden buscar números")
-      return
-    }
-
-    if (searchQuery.length < 3) {
-      setError("Debe tener un máximo de tres caracteres")
-      return
-    }
-
-    setError(null)
+    // const searchQuery = e.target.value /* Para asegurarnos de estar usando el último valor del estado y que no quede un paso atrás */
+    /* if (searchQuery.star) */
+    updateSearch(e.target.value)
   }
 
   return (
@@ -72,7 +56,12 @@ function App() {
           <input name="fromEntries" ref={inputRef} type='text' placeholder='Carrie, Harry Potter, Matrix...' /> */}
 
           {/* 3 */}
-          <input onChange={handleChange} type='text' placeholder='Carrie, Harry Potter, Matrix...' />
+          <input onChange={handleChange}
+            style={{
+              border: "1px solid transparent",
+              borderColor: error ? "red" : "transparent"
+            }} value={search} name="search"
+            type='text' placeholder='Carrie, Harry Potter, Matrix...' />
           <button type='submit'>Buscar</button>
 
 
@@ -81,7 +70,9 @@ function App() {
       </header>
 
       <main>
-        <Movies movies={movies} />
+        {
+          loading ? <p>Cargando...</p> : <Movies movies={movies} />
+        }
       </main>
     </div>
   )
