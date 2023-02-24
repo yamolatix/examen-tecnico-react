@@ -3,6 +3,7 @@ import './App.css'
 import { Movies } from './components/Movies'
 import { useMovies } from './hooks/useMovies'
 import { useSearch } from './hooks/useSearch'
+import debounce from "just-debounce-it"
 
 function App() {
   const [sort, setSort] = useState(false)
@@ -12,6 +13,11 @@ function App() {
 
   const { movies, getMovies, loading } = useMovies({ search, sort })
 
+
+  const debounceGetMovies = debounce(search => {
+    console.log("search", search)
+    getMovies({ search })
+  }, 300)
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -39,9 +45,12 @@ function App() {
   // Forma controlada por React
   // 3
   const handleChange = (e) => {
-    // const searchQuery = e.target.value /* Para asegurarnos de estar usando el último valor del estado y que no quede un paso atrás */
+    // Para el debounce en la busqueda podemos pasarle como parametro al getMovies la query a la vez que se escribe!! Se guarda en una constante y se le pasa a la funcion
+
+    const searchQuery = e.target.value /* Para asegurarnos de estar usando el último valor del estado y que no quede un paso atrás */
     /* if (searchQuery.star) */
     updateSearch(e.target.value)
+    getMovies({ search: searchQuery })
   }
 
   const hanldleSort = () => {
