@@ -17,6 +17,6 @@ Requerimientos:
 
 Primera iteración:
 
-- Evitar que se haga la misma búsqueda dos veces seguidas.
-- Haz que la búsqueda se haga atutomaticamente al escribir.
-- Evita que se haga la búsqueda continuamente al escribir (debaunce). 
+[x] Evitar que se haga la misma búsqueda dos veces seguidas.
+[x] Haz que la búsqueda se haga atutomaticamente al escribir.
+[x] Evita que se haga la búsqueda continuamente al escribir (debaunce). 

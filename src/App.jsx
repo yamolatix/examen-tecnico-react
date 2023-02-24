@@ -1,15 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './App.css'
 import { Movies } from './components/Movies'
 import { useMovies } from './hooks/useMovies'
 import { useSearch } from './hooks/useSearch'
 
 function App() {
+  const [sort, setSort] = useState(false)
   // const inputRef = useRef() /* Usar en la forma NO controlada (Caso 1 y 2) */
   //  Usar en la forma controlada.(Caso 3)
   const { search, updateSearch, error } = useSearch()
 
-  const { movies, getMovies, loading } = useMovies({ search })
+  const { movies, getMovies, loading } = useMovies({ search, sort })
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,7 +32,8 @@ function App() {
     // 3
     // console.log("search", { search });
 
-    getMovies()
+    // Acá se le pasa como parametro el search que recibe el useSearch
+    getMovies({ search })
   }
 
   // Forma controlada por React
@@ -39,6 +42,10 @@ function App() {
     // const searchQuery = e.target.value /* Para asegurarnos de estar usando el último valor del estado y que no quede un paso atrás */
     /* if (searchQuery.star) */
     updateSearch(e.target.value)
+  }
+
+  const hanldleSort = () => {
+    setSort(!sort)
   }
 
   return (
@@ -62,8 +69,10 @@ function App() {
               borderColor: error ? "red" : "transparent"
             }} value={search} name="search"
             type='text' placeholder='Carrie, Harry Potter, Matrix...' />
+          <input type="checkbox" onChange={hanldleSort} checked={sort} />
           <button type='submit'>Buscar</button>
-
+          <div className='sortMovies'>
+          </div>
 
         </form>
         {error && <p style={{ color: "red" }}>{error}</p>}
